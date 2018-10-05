@@ -1,10 +1,18 @@
-from flask import Flask
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/home')
+def home():
+    return render_template('home.html', title='Home', message="Welcome Home")
+
+
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
+    if request.method == 'POST':
+        return "Posted"
+
     return 'Hello, World'
 
 
